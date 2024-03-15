@@ -108,7 +108,7 @@ This project aims to deploy a scalable two-tier application running on Flask and
          message TEXT
   ```
 
-5. **Show you messages in you MYSQL Database**
+5. **Show your messages in you MYSQL Database**
 
    ```bash
    select * from messages;
