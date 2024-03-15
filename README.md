@@ -120,7 +120,7 @@ This project aims to deploy a scalable two-tier application running on Flask and
    DELETE FROM messages;
    ```
 
-***This is all that I deployed two tier flask app using dockerising . If you stuck during making this project, feel free to ask anything. I love to help you. You can contact me on [LinkedIn](https://linkedin.com/in/md-azfar-alam)***
+***This is all that I deployed two tier flask app using dockerising . If you stuck during making this project, feel free to ask anything. I love to help you. You can contact me on [LinkedIn](https://linkedin.com/in/md-azfar-alam), [Instagram](instagram.com/azfarxx) or [Discord](https://discord.com/users/877531143610708028)***
 
 
 ## Keep Learning & Sharing.. ✨
