@@ -15,6 +15,7 @@ mysql = MySQL(app)
 
 @app.route('/')
 def hello():
+    # Retrieve messages from the database
     cur = mysql.connection.cursor()
     cur.execute('SELECT message FROM messages')
     messages = cur.fetchall()
