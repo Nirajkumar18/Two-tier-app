@@ -1,5 +1,11 @@
 # How to setup two-tier application deployment on kubernetes cluster
 
+### Pre-requisites
+  - Ubuntu OS (Xenial or later)
+  - sudo privileges
+  - AWS- t2.medium instance type or higher
+  - Internet access
+
 ## First setup kubernetes kubeadm cluster
 
   ```bash
