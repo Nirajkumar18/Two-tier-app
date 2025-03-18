@@ -2,7 +2,10 @@ version: '3'
 services:
 
   backend:
-    image: dockerghost584/flask-app
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: dockerghost584/flask-app     # if dont want to use pre-built image use own image.
     ports:
       - "5000:5000"
     environment:
