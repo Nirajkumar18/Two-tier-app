@@ -42,5 +42,5 @@ jobs:
 
       - name: Push image to ECR
         run: |
-          IMAGE_URI=${{ needs.build.outputs.image_uri }}
+          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}
           docker push $IMAGE_URI:latest
