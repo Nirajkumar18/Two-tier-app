@@ -5,13 +5,6 @@ on:
     branches:
       - prod
 
-env:
-  AWS_REGION: ${{ secrets.AWS_REGION }}
-  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-  ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-  IMAGE_TAG: latest
-  IMAGE_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}
-
 jobs:
   build-and-push:
     name: Build & Push Docker Image to Amazon ECR
@@ -35,15 +28,14 @@ jobs:
       - name: Build Docker image
         run: |
           set -e
-          echo "🔨 Building Docker image..."
-          docker build -t $IMAGE_URI:$IMAGE_TAG -t $IMAGE_URI:${{ github.sha }} .
+          echo "🔨 Building Docker image with tag: $IMAGE_TAG"
+          docker build -t $IMAGE_URI:$IMAGE_TAG .
 
       - name: Push Docker image to ECR
         run: |
           set -e
-          echo "📤 Pushing Docker image to ECR..."
+          echo "📤 Pushing Docker image to ECR with tag: $IMAGE_TAG"
           docker push $IMAGE_URI:$IMAGE_TAG
-          docker push $IMAGE_URI:${{ github.sha }}
 
-      - name: Image pushed successfully
-        run: echo "✅ Docker image pushed to ECR as [$IMAGE_TAG] and [${{ github.sha }}]"
+      - name: ✅ Done
+        run: echo "✅ Docker image [$IMAGE_TAG] successfully pushed to ECR!"
