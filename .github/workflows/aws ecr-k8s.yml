@@ -6,29 +6,13 @@ on:
       - prod
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
-    outputs:
-      image_uri: ${{ steps.set-image-uri.outputs.image_uri }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set image URI
-        id: set-image-uri
-        run: echo "image_uri=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}" >> "$GITHUB_OUTPUT"
-
-      - name: Build Docker image
-        run: |
-          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}
-          docker build -t $IMAGE_URI:latest .
-
-  push:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -39,6 +23,11 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build Docker image
+        run: |
+          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}
+          docker build -t $IMAGE_URI:latest .
 
       - name: Push image to ECR
         run: |
